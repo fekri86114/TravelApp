@@ -16,8 +16,12 @@
         <entry key="..\:/Users/Klap.ir/Documents/android/CountriesApp/app/src/main/res/layout/fragment_splash.xml" value="0.18541666666666667" />
         <entry key="..\:/Users/Klap.ir/Documents/android/CountriesApp/app/src/main/res/layout/fragment_switzerland.xml" value="0.18541666666666667" />
         <entry key="..\:/Users/Klap.ir/Documents/android/CountriesApp/app/src/main/res/layout/fragment_travel.xml" value="0.18541666666666667" />
+        <entry key="..\:/Users/Klap.ir/Documents/android/CountriesApp/app/src/main/res/layout/header_layout.xml" value="0.22" />
         <entry key="..\:/Users/Klap.ir/Documents/android/CountriesApp/app/src/main/res/layout/splash_activity.xml" value="0.1390625" />
         <entry key="..\:/Users/Klap.ir/Documents/android/CountriesApp/app/src/main/res/menu/bottom_nav.xml" value="0.44611528822055135" />
+        <entry key="..\:/Users/Klap.ir/Documents/android/CountriesApp/app/src/main/res/menu/drawer_nav_menu.xml" value="0.25" />
+        <entry key="..\:/Users/Klap.ir/Documents/android/CountriesApp/app/src/main/res/menu/header_laoyout.xml" value="0.184375" />
+        <entry key="..\:/Users/Klap.ir/Documents/android/CountriesApp/app/src/main/res/menu/navigation_drawer.xml" value="0.18541666666666667" />
       </map>
     </option>
   </component>
