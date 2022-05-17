@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">CountriesApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="splashscreen">SplashScreen</string>
+    <string name="travel">Travel</string>
+    <string name="profile">Profile</string>
+    <string name="about_us">About Us</string>
+    <string name="loading">Loading...</string>
+</resources>
