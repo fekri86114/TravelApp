@@ -13,5 +13,9 @@
         android:id="@+id/nav_iran"
         android:title="Iran"
         android:icon="@drawable/ic_flag"/>
+    <item
+        android:id="@+id/nav_canada"
+        android:title="Canada"
+        android:icon="@drawable/ic_flag"/>
 
 </menu>

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/nav_home">
+    app:startDestination="@id/nav_america">
 
     <fragment
         android:id="@+id/nav_home"
@@ -16,9 +16,9 @@
         android:label="ABOUT US"
         tools:layout="@layout/fragment_about_us" />
     <fragment
-        android:id="@+id/nav_profile"
+        android:id="@+id/nav_canada"
         android:name="com.app.countriesapp.fragments.ProfileFragment"
-        android:label="PROFILE"
+        android:label="CANADA"
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/nav_america"
