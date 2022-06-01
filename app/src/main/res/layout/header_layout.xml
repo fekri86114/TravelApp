@@ -13,7 +13,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:srcCompat="@drawable/ic_launcher_background" />
+        app:srcCompat="@mipmap/ic_launcher_icon_foreground" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textview_header"
@@ -23,7 +23,7 @@
         app:layout_constraintStart_toStartOf="@id/imageview_header"
         app:layout_constraintEnd_toEndOf="@id/imageview_header"
         android:text="Travel"
-        android:textSize="@dimen/text_size_4"
+        android:textSize="@dimen/text_size_normal"
         android:layout_marginTop="12dp"
         android:textColor="@color/primaryTextColor"/>
 

@@ -110,14 +110,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         item.setChecked(true);
         binding.drawerLayout.closeDrawers();
         switch (item.getItemId()) {
-            case R.id.nav_home:
-                navController.navigate(R.id.nav_home);
-                break;
-
             case R.id.nav_about_us:
                 navController.navigate(R.id.nav_about_us);
                 break;
-
         }
         return true;
     }
