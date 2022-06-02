@@ -6,7 +6,8 @@
     tools:context=".fragments.AmericaFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_margin="@dimen/text_size_small"
+        android:layout_marginTop="@dimen/spacing_2x"
+        android:padding="@dimen/spacing_2x"
         android:id="@+id/recyclerview_america"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
