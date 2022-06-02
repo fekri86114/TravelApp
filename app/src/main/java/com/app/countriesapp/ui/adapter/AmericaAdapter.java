@@ -1,8 +1,13 @@
 package com.app.countriesapp.ui.adapter;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
@@ -13,10 +18,12 @@ import com.app.countriesapp.R;
 import com.app.countriesapp.ui.model.AmericaModel;
 import com.bumptech.glide.Glide;
 
+import java.time.Duration;
 import java.util.List;
 
 public class AmericaAdapter extends RecyclerView.Adapter<AmericaAdapter.AmericaViewHolder> {
     private final List<AmericaModel> americaModelList;
+    private int lastPosition = -1;
 
     public AmericaAdapter(List<AmericaModel> americaModelList) {
         this.americaModelList = americaModelList;
@@ -34,6 +41,8 @@ public class AmericaAdapter extends RecyclerView.Adapter<AmericaAdapter.AmericaV
         AmericaModel americaModel = americaModelList.get(position);
         Glide.with(holder.itemView.getContext()).load(americaModel.getAmericaImage()).into(holder.imageViewAmerica);
         holder.textViewAmerica.setText(americaModel.getAmericaName());
+
+        setFadeAnimation(holder.itemView, position);
     }
 
     @Override
@@ -51,5 +60,14 @@ public class AmericaAdapter extends RecyclerView.Adapter<AmericaAdapter.AmericaV
             imageViewAmerica = itemView.findViewById(R.id.imageview_america);
         }
     }
-
+    private void setFadeAnimation(View viewToAnimate, int position)
+    {
+        // If the bound view wasn't previously displayed on screen, it's animated
+        if (position > lastPosition)
+        {
+            Animation animation = AnimationUtils.loadAnimation(viewToAnimate.getContext(), R.anim.enter_from_left_slide);
+            viewToAnimate.startAnimation(animation);
+            lastPosition = position;
+        }
+    }
 }
