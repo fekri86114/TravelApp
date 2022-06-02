@@ -7,27 +7,27 @@
 
     <fragment
         android:id="@+id/nav_about_us"
-        android:name="com.app.countriesapp.fragments.AboutUsFragment"
+        android:name="com.app.countriesapp.ui.fragments.AboutUsFragment"
         android:label="ABOUT US"
         tools:layout="@layout/fragment_about_us" />
     <fragment
         android:id="@+id/nav_canada"
-        android:name="com.app.countriesapp.fragments.CanadaFragment"
+        android:name="com.app.countriesapp.ui.fragments.CanadaFragment"
         android:label="CANADA"
         tools:layout="@layout/fragment_canada" />
     <fragment
         android:id="@+id/nav_america"
-        android:name="com.app.countriesapp.fragments.AmericaFragment"
+        android:name="com.app.countriesapp.ui.fragments.AmericaFragment"
         android:label="AMERICA"
         tools:layout="@layout/fragment_america" />
     <fragment
         android:id="@+id/nav_switzerland"
-        android:name="com.app.countriesapp.fragments.SwitzerlandFragment"
+        android:name="com.app.countriesapp.ui.fragments.SwitzerlandFragment"
         android:label="SWITZERLAND"
         tools:layout="@layout/fragment_switzerland" />
     <fragment
         android:id="@+id/nav_iran"
-        android:name="com.app.countriesapp.fragments.IranFragment"
+        android:name="com.app.countriesapp.ui.fragments.IranFragment"
         android:label="IRAN"
         tools:layout="@layout/fragment_iran" />
 </navigation>

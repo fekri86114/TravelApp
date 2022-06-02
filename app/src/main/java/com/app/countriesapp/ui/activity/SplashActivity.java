@@ -1,10 +1,12 @@
-package com.app.countriesapp;
+package com.app.countriesapp.ui.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+
+import com.app.countriesapp.R;
 
 public class SplashActivity extends AppCompatActivity {
 

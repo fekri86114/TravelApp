@@ -3,16 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.AmericaFragment">
+    tools:context=".ui.fragments.AmericaFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_marginTop="@dimen/spacing_2x"
-        android:padding="@dimen/spacing_2x"
         android:id="@+id/recyclerview_america"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/item_recyclerview_america"/>
-
+        android:layout_marginTop="@dimen/spacing_2x"
+        android:padding="@dimen/spacing_2x"
+        tools:listitem="@layout/item_recyclerview_america" />
 
 
 </FrameLayout>
