@@ -14,7 +14,11 @@
         android:id="@+id/nav_canada"
         android:name="com.app.countriesapp.ui.fragments.CanadaFragment"
         android:label="CANADA"
-        tools:layout="@layout/fragment_canada" />
+        tools:layout="@layout/fragment_canada" >
+        <action
+            android:id="@+id/action_nav_canada_to_detailsFragmentCanada"
+            app:destination="@id/detailsFragmentCanada" />
+    </fragment>
     <fragment
         android:id="@+id/nav_america"
         android:name="com.app.countriesapp.ui.fragments.AmericaFragment"
@@ -36,10 +40,14 @@
         tools:layout="@layout/fragment_iran" />
     <fragment
         android:id="@+id/detailsFragment"
-        android:name="com.app.countriesapp.ui.fragments.DetailsFragment"
+        android:name="com.app.countriesapp.ui.fragments.details.DetailsFragment"
         android:label="DetailsFragment" >
         <argument
             android:name="CountreisModel"
             app:argType="com.app.countriesapp.ux.model.AmericaModel" />
     </fragment>
+    <fragment
+        android:id="@+id/detailsFragmentCanada"
+        android:name="com.app.countriesapp.ui.fragments.details.DetailsFragmentCanada"
+        android:label="DetailsFragmentCanada" />
 </navigation>

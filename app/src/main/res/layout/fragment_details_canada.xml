@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imageview_america_details"
+        android:id="@+id/imageview_canada_details"
         android:layout_width="match_parent"
         android:layout_height="400dp"
         android:layout_margin="@dimen/spacing_2x"
@@ -17,7 +17,7 @@
         tools:src="@drawable/ic_launcher_background" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textview_america_name_details"
+        android:id="@+id/textview_canada_name_details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_2x"
@@ -28,7 +28,7 @@
         android:textSize="@dimen/text_size_xlarge"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageview_america_details"
+        app:layout_constraintTop_toBottomOf="@id/imageview_canada_details"
         tools:text="text name" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
