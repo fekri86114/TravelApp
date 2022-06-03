@@ -1,6 +1,8 @@
 package com.app.countriesapp.ux.model;
 
-public class AmericaModel {
+import java.io.Serializable;
+
+public class AmericaModel implements Serializable {
 
     private String americaImage;
     private String americaName;
@@ -8,6 +10,9 @@ public class AmericaModel {
     public AmericaModel(String americaImage, String americaName) {
         this.americaImage = americaImage;
         this.americaName = americaName;
+    }
+    public AmericaModel(){
+
     }
 
     public String getAmericaImage() {

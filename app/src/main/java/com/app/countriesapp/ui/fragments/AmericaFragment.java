@@ -5,12 +5,15 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.app.countriesapp.R;
 import com.app.countriesapp.databinding.FragmentAmericaBinding;
 import com.app.countriesapp.ux.adapter.AmericaAdapter;
 import com.app.countriesapp.ux.model.AmericaModel;
@@ -18,7 +21,7 @@ import com.app.countriesapp.ux.model.AmericaModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AmericaFragment extends Fragment {
+public class AmericaFragment extends Fragment implements AmericaAdapter.SetOnItemClickListener{
 
 private FragmentAmericaBinding binding;
 private AmericaAdapter americaAdapter;
@@ -33,7 +36,7 @@ private AmericaAdapter americaAdapter;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        americaAdapter = new AmericaAdapter(setListData());
+        americaAdapter = new AmericaAdapter(setListData(), this);
         binding.recyclerviewAmerica.setHasFixedSize(true);
         binding.recyclerviewAmerica.setLayoutManager(new GridLayoutManager(getContext(), 2));
         binding.recyclerviewAmerica.setAdapter(americaAdapter);
@@ -57,5 +60,10 @@ private AmericaAdapter americaAdapter;
         return listItem;
     }
 
-
+    @Override
+    public void ItemClicked(AmericaModel americaModel) {
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("AMERICA_MODEL", new AmericaModel());
+        Navigation.findNavController(binding.getRoot()).navigate(R.id.action_nav_america_to_detailsFragment2, bundle);
+    }
 }

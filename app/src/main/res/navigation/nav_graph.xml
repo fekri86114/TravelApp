@@ -37,5 +37,9 @@
     <fragment
         android:id="@+id/detailsFragment"
         android:name="com.app.countriesapp.ui.fragments.DetailsFragment"
-        android:label="DetailsFragment" />
+        android:label="DetailsFragment" >
+        <argument
+            android:name="CountreisModel"
+            app:argType="com.app.countriesapp.ux.model.AmericaModel" />
+    </fragment>
 </navigation>

@@ -19,10 +19,12 @@ import java.util.List;
 
 public class AmericaAdapter extends RecyclerView.Adapter<AmericaAdapter.AmericaViewHolder> {
     private final List<AmericaModel> americaModelList;
+    public SetOnItemClickListener listener;
     private int lastPosition = -1;
 
-    public AmericaAdapter(List<AmericaModel> americaModelList) {
+    public AmericaAdapter(List<AmericaModel> americaModelList, SetOnItemClickListener listener) {
         this.americaModelList = americaModelList;
+        this.listener = listener;
     }
 
     @NonNull
@@ -37,13 +39,18 @@ public class AmericaAdapter extends RecyclerView.Adapter<AmericaAdapter.AmericaV
         AmericaModel americaModel = americaModelList.get(position);
         Glide.with(holder.itemView.getContext()).load(americaModel.getAmericaImage()).into(holder.imageViewAmerica);
         holder.textViewAmerica.setText(americaModel.getAmericaName());
-
         setFadeAnimation(holder.itemView, position);
+        holder.itemView.setOnClickListener(view -> listener.ItemClicked(americaModel));
     }
 
-    @Override
-    public int getItemCount() {
-        return americaModelList.size();
+
+    private void setFadeAnimation(View viewToAnimate, int position) {
+        // If the bound view wasn't previously displayed on screen, it's animated
+        if (position > lastPosition) {
+            Animation animation = AnimationUtils.loadAnimation(viewToAnimate.getContext(), R.anim.enter_from_left_slide);
+            viewToAnimate.startAnimation(animation);
+            lastPosition = position;
+        }
     }
 
     public static class AmericaViewHolder extends RecyclerView.ViewHolder {
@@ -56,14 +63,11 @@ public class AmericaAdapter extends RecyclerView.Adapter<AmericaAdapter.AmericaV
             imageViewAmerica = itemView.findViewById(R.id.imageview_america);
         }
     }
-    private void setFadeAnimation(View viewToAnimate, int position)
-    {
-        // If the bound view wasn't previously displayed on screen, it's animated
-        if (position > lastPosition)
-        {
-            Animation animation = AnimationUtils.loadAnimation(viewToAnimate.getContext(), R.anim.enter_from_left_slide);
-            viewToAnimate.startAnimation(animation);
-            lastPosition = position;
-        }
+    @Override
+    public int getItemCount() {
+        return americaModelList.size();
+    }
+    public interface SetOnItemClickListener{
+        void ItemClicked(AmericaModel americaModel);
     }
 }
