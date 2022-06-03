@@ -1,5 +1,7 @@
 plugins {
     id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'androidx.navigation.safeargs'
 }
 
 android {
@@ -54,8 +56,5 @@ dependencies {
     //Glide
     implementation 'com.github.bumptech.glide:glide:4.13.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.13.0'
-
-    //circularImageView Library for showing images in circles
-    implementation 'de.hdodenhof:circleimageview:3.0.0'
 
 }

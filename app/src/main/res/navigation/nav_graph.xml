@@ -19,7 +19,11 @@
         android:id="@+id/nav_america"
         android:name="com.app.countriesapp.ui.fragments.AmericaFragment"
         android:label="AMERICA"
-        tools:layout="@layout/fragment_america" />
+        tools:layout="@layout/fragment_america" >
+        <action
+            android:id="@+id/action_nav_america_to_detailsFragment2"
+            app:destination="@id/detailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/nav_switzerland"
         android:name="com.app.countriesapp.ui.fragments.SwitzerlandFragment"
@@ -30,4 +34,8 @@
         android:name="com.app.countriesapp.ui.fragments.IranFragment"
         android:label="IRAN"
         tools:layout="@layout/fragment_iran" />
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.app.countriesapp.ui.fragments.DetailsFragment"
+        android:label="DetailsFragment" />
 </navigation>

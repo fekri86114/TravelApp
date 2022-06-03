@@ -1,8 +1,5 @@
-package com.app.countriesapp.ui.adapter;
+package com.app.countriesapp.ux.adapter;
 
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,10 +12,9 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.countriesapp.R;
-import com.app.countriesapp.ui.model.AmericaModel;
+import com.app.countriesapp.ux.model.AmericaModel;
 import com.bumptech.glide.Glide;
 
-import java.time.Duration;
 import java.util.List;
 
 public class AmericaAdapter extends RecyclerView.Adapter<AmericaAdapter.AmericaViewHolder> {

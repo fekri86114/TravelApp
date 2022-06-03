@@ -1,4 +1,4 @@
-package com.app.countriesapp.ui.model;
+package com.app.countriesapp.ux.model;
 
 public class AmericaModel {
 
