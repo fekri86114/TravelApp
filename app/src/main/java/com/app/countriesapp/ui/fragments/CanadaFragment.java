@@ -69,8 +69,6 @@ public class CanadaFragment extends Fragment implements CanadaAdapter.SetOnItemC
         return listItem;
     }
 
-
-
     @Override
     public void ItemClickedCanada(CanadaModel canadaModel) {
         Bundle bundle = new Bundle();

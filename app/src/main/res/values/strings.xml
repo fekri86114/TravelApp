@@ -10,4 +10,11 @@
     <string name="drawer_open">Drawer open</string>
     <string name="drawer_close">Drawer close</string>
     <string name="developer">Developer: Mohammadreza Fekri</string>
+    <string name="delete">Delete</string>
+    <string name="america">America</string>
+    <string name="switzerland">Switzerland</string>
+    <string name="iran">Iran</string>
+    <string name="canada">Canada</string>
+    <string name="about">About</string>
+    <string name="set_as_wallpaper">Set as wallpaper</string>
 </resources>

@@ -27,8 +27,6 @@ public class CanadaAdapter extends RecyclerView.Adapter<CanadaAdapter.CanadaView
         this.listener = listener;
     }
 
-
-
     @NonNull
     @Override
     public CanadaViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -49,7 +47,7 @@ public class CanadaAdapter extends RecyclerView.Adapter<CanadaAdapter.CanadaView
     private void setFadeAnimation(View viewToAnimate, int position) {
         // If the bound view wasn't previously displayed on screen, it's animated
         if (position > lastPosition) {
-            Animation animation = AnimationUtils.loadAnimation(viewToAnimate.getContext(), androidx.navigation.ui.R.anim.nav_default_enter_anim);
+            Animation animation = AnimationUtils.loadAnimation(viewToAnimate.getContext(), R.anim.enter_from_left_slide);
             viewToAnimate.startAnimation(animation);
             lastPosition = position;
         }

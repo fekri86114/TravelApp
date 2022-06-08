@@ -32,12 +32,20 @@
         android:id="@+id/nav_switzerland"
         android:name="com.app.countriesapp.ui.fragments.SwitzerlandFragment"
         android:label="SWITZERLAND"
-        tools:layout="@layout/fragment_switzerland" />
+        tools:layout="@layout/fragment_switzerland" >
+        <action
+            android:id="@+id/action_nav_switzerland_to_detailsFragmentSwitzerland"
+            app:destination="@id/detailsFragmentSwitzerland" />
+    </fragment>
     <fragment
         android:id="@+id/nav_iran"
         android:name="com.app.countriesapp.ui.fragments.IranFragment"
         android:label="IRAN"
-        tools:layout="@layout/fragment_iran" />
+        tools:layout="@layout/fragment_iran" >
+        <action
+            android:id="@+id/action_nav_iran_to_detailsFragmentIran"
+            app:destination="@id/detailsFragmentIran" />
+    </fragment>
     <fragment
         android:id="@+id/detailsFragment"
         android:name="com.app.countriesapp.ui.fragments.details.DetailsFragment"
@@ -50,4 +58,12 @@
         android:id="@+id/detailsFragmentCanada"
         android:name="com.app.countriesapp.ui.fragments.details.DetailsFragmentCanada"
         android:label="DetailsFragmentCanada" />
+    <fragment
+        android:id="@+id/detailsFragmentIran"
+        android:name="com.app.countriesapp.ui.fragments.details.DetailsFragmentIran"
+        android:label="DetailsFragmentIran" />
+    <fragment
+        android:id="@+id/detailsFragmentSwitzerland"
+        android:name="com.app.countriesapp.ui.fragments.details.DetailsFragmentSwitzerland"
+        android:label="DetailsFragmentSwitzerland" />
 </navigation>
