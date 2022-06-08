@@ -17,4 +17,7 @@
     <string name="canada">Canada</string>
     <string name="about">About</string>
     <string name="set_as_wallpaper">Set as wallpaper</string>
+    <string name="are_you_sure_that_you_want_to_delete_this_item">Are you sure that you want to delete this item?</string>
+    <string name="cancel">Cancel</string>
+    <string name="confirm">Confirm</string>
 </resources>

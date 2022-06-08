@@ -6,7 +6,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupMenu;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -85,7 +84,14 @@ public class AmericaFragment extends Fragment implements AmericaAdapter.SetOnIte
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
-                Toast.makeText(getContext(), "You Clicked: " + menuItem.getTitle(), Toast.LENGTH_SHORT).show();
+                switch (menuItem.getItemId()) {
+                    case R.id.delete:
+
+                        break;
+                    case R.id.set_wallpaper:
+
+                        break;
+                }
                 return true;
             }
         });
