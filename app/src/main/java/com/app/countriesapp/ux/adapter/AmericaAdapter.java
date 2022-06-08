@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
@@ -20,11 +21,13 @@ import java.util.List;
 public class AmericaAdapter extends RecyclerView.Adapter<AmericaAdapter.AmericaViewHolder> {
     private final List<AmericaModel> americaModelList;
     public SetOnItemClickListener listener;
+    public SetOnMenuClickListener menuClickListener;
     private int lastPosition = -1;
 
-    public AmericaAdapter(List<AmericaModel> americaModelList, SetOnItemClickListener listener) {
+    public AmericaAdapter(List<AmericaModel> americaModelList, SetOnItemClickListener listener, SetOnMenuClickListener menuClickListener) {
         this.americaModelList = americaModelList;
         this.listener = listener;
+        this.menuClickListener = menuClickListener;
     }
 
     @NonNull
@@ -41,6 +44,7 @@ public class AmericaAdapter extends RecyclerView.Adapter<AmericaAdapter.AmericaV
         holder.textViewAmerica.setText(americaModel.getAmericaName());
         setFadeAnimation(holder.itemView, position);
         holder.itemView.setOnClickListener(view -> listener.ItemClicked(americaModel));
+        holder.itemView.setOnClickListener(view -> menuClickListener.MenuClicked(holder.imageMenu));
     }
 
 
@@ -54,13 +58,15 @@ public class AmericaAdapter extends RecyclerView.Adapter<AmericaAdapter.AmericaV
     }
 
     public static class AmericaViewHolder extends RecyclerView.ViewHolder {
-        private final AppCompatTextView textViewAmerica;
-        private final AppCompatImageView imageViewAmerica;
+        private AppCompatTextView textViewAmerica;
+        private AppCompatImageView imageViewAmerica;
+        private AppCompatImageView imageMenu;
 
         public AmericaViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewAmerica = itemView.findViewById(R.id.textview_america);
             imageViewAmerica = itemView.findViewById(R.id.imageview_america);
+            imageMenu = itemView.findViewById(R.id.imageview_popup_menu);
         }
     }
     @Override
@@ -69,5 +75,8 @@ public class AmericaAdapter extends RecyclerView.Adapter<AmericaAdapter.AmericaV
     }
     public interface SetOnItemClickListener{
         void ItemClicked(AmericaModel americaModel);
+    }
+    public interface SetOnMenuClickListener{
+        void MenuClicked(View view);
     }
 }

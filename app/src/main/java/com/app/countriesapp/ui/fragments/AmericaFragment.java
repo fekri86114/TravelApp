@@ -1,16 +1,18 @@
 package com.app.countriesapp.ui.fragments;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.PopupMenu;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.app.countriesapp.R;
 import com.app.countriesapp.databinding.FragmentAmericaBinding;
@@ -20,10 +22,10 @@ import com.app.countriesapp.ux.model.AmericaModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AmericaFragment extends Fragment implements AmericaAdapter.SetOnItemClickListener{
+public class AmericaFragment extends Fragment implements AmericaAdapter.SetOnItemClickListener, AmericaAdapter.SetOnMenuClickListener {
 
-private FragmentAmericaBinding binding;
-private AmericaAdapter americaAdapter;
+    private FragmentAmericaBinding binding;
+    private AmericaAdapter americaAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -39,13 +41,13 @@ private AmericaAdapter americaAdapter;
     }
 
     private void setupRecyclerview() {
-        americaAdapter = new AmericaAdapter(setListData(), this);
+        americaAdapter = new AmericaAdapter(setListData(), this, this);
         binding.recyclerviewAmerica.setHasFixedSize(true);
         binding.recyclerviewAmerica.setLayoutManager(new GridLayoutManager(getContext(), 2));
         binding.recyclerviewAmerica.setAdapter(americaAdapter);
     }
 
-    private List<AmericaModel> setListData(){
+    private List<AmericaModel> setListData() {
         List<AmericaModel> listItem = new ArrayList<>();
         listItem.add(new AmericaModel("https://i.pinimg.com/originals/29/4a/df/294adf525edf1ab4e94db8039159794c.jpg", "White House"));
         listItem.add(new AmericaModel("https://i.pinimg.com/originals/23/37/03/233703cfaae80a3c24fc652f7ace910a.jpg", "Bridge"));
@@ -70,5 +72,23 @@ private AmericaAdapter americaAdapter;
         Bundle bundle = new Bundle();
         bundle.putSerializable("AMERICA_MODEL", americaModel);
         Navigation.findNavController(binding.getRoot()).navigate(R.id.action_nav_america_to_detailsFragment2, bundle);
+    }
+
+    @Override
+    public void MenuClicked(View view) {
+        showPopupMenu(view);
+    }
+
+    private void showPopupMenu(View view) {
+        PopupMenu popupMenu = new PopupMenu(getContext(), view);
+        popupMenu.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                Toast.makeText(getContext(), "You Clicked: " + menuItem.getTitle(), Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        });
+        popupMenu.show();
     }
 }

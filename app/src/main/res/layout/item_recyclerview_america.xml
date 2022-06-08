@@ -8,14 +8,13 @@
     app:cardElevation="@dimen/cardview_default_elevation"
     app:cardPreventCornerOverlap="true"
     app:cardUseCompatPadding="true">
-
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imageview_america"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="200dp"
             tools:src="@drawable/ic_launcher_background"
             android:scaleType="centerCrop"/>
@@ -29,7 +28,16 @@
             style="@style/TextviewBoldWhite"
             tools:text="ldskfhd"/>
 
-
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageview_popup_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_menu"
+            android:tint="@color/primaryTextColor"
+            android:elevation="@dimen/spacing_2x"
+            android:layout_gravity="end|top"
+            android:layout_margin="@dimen/spacing_2x"
+            android:padding="@dimen/spacing_2x"/>
     </FrameLayout>
 
 </androidx.cardview.widget.CardView>
