@@ -1,23 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.fragments.IranFragment">
 
-    <FrameLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview_iran"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
->
+        android:layout_marginTop="@dimen/spacing_2x"
+        android:padding="@dimen/spacing_2x"
+        tools:listitem="@layout/item_recyclerview_iran" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Iran"
-            android:textSize="35sp"
-            android:gravity="center"/>
-
-    </FrameLayout>
-
-</androidx.core.widget.NestedScrollView>
+</FrameLayout>

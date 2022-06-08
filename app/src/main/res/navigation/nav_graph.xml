@@ -14,20 +14,56 @@
         android:id="@+id/nav_canada"
         android:name="com.app.countriesapp.ui.fragments.CanadaFragment"
         android:label="CANADA"
-        tools:layout="@layout/fragment_canada" />
+        tools:layout="@layout/fragment_canada" >
+        <action
+            android:id="@+id/action_nav_canada_to_detailsFragmentCanada"
+            app:destination="@id/detailsFragmentCanada" />
+    </fragment>
     <fragment
         android:id="@+id/nav_america"
         android:name="com.app.countriesapp.ui.fragments.AmericaFragment"
         android:label="AMERICA"
-        tools:layout="@layout/fragment_america" />
+        tools:layout="@layout/fragment_america" >
+        <action
+            android:id="@+id/action_nav_america_to_detailsFragment2"
+            app:destination="@id/detailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/nav_switzerland"
         android:name="com.app.countriesapp.ui.fragments.SwitzerlandFragment"
         android:label="SWITZERLAND"
-        tools:layout="@layout/fragment_switzerland" />
+        tools:layout="@layout/fragment_switzerland" >
+        <action
+            android:id="@+id/action_nav_switzerland_to_detailsFragmentSwitzerland"
+            app:destination="@id/detailsFragmentSwitzerland" />
+    </fragment>
     <fragment
         android:id="@+id/nav_iran"
         android:name="com.app.countriesapp.ui.fragments.IranFragment"
         android:label="IRAN"
-        tools:layout="@layout/fragment_iran" />
+        tools:layout="@layout/fragment_iran" >
+        <action
+            android:id="@+id/action_nav_iran_to_detailsFragmentIran"
+            app:destination="@id/detailsFragmentIran" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.app.countriesapp.ui.fragments.details.DetailsFragment"
+        android:label="DetailsFragment" >
+        <argument
+            android:name="CountreisModel"
+            app:argType="com.app.countriesapp.ux.model.AmericaModel" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsFragmentCanada"
+        android:name="com.app.countriesapp.ui.fragments.details.DetailsFragmentCanada"
+        android:label="DetailsFragmentCanada" />
+    <fragment
+        android:id="@+id/detailsFragmentIran"
+        android:name="com.app.countriesapp.ui.fragments.details.DetailsFragmentIran"
+        android:label="DetailsFragmentIran" />
+    <fragment
+        android:id="@+id/detailsFragmentSwitzerland"
+        android:name="com.app.countriesapp.ui.fragments.details.DetailsFragmentSwitzerland"
+        android:label="DetailsFragmentSwitzerland" />
 </navigation>

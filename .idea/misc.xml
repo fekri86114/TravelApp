@@ -3,19 +3,28 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Klap.ir/Documents/android/AndroidProject/TravelApp/app/src/main/res/drawable/ic_menu.xml" value="0.165" />
         <entry key="..\:/Users/Klap.ir/Documents/android/AndroidProject/TravelApp/app/src/main/res/layout/activity_main.xml" value="0.18541666666666667" />
         <entry key="..\:/Users/Klap.ir/Documents/android/AndroidProject/TravelApp/app/src/main/res/layout/activity_splash.xml" value="0.18541666666666667" />
         <entry key="..\:/Users/Klap.ir/Documents/android/AndroidProject/TravelApp/app/src/main/res/layout/fragment_about_us.xml" value="0.25" />
         <entry key="..\:/Users/Klap.ir/Documents/android/AndroidProject/TravelApp/app/src/main/res/layout/fragment_america.xml" value="0.2" />
         <entry key="..\:/Users/Klap.ir/Documents/android/AndroidProject/TravelApp/app/src/main/res/layout/fragment_canada.xml" value="0.18541666666666667" />
+        <entry key="..\:/Users/Klap.ir/Documents/android/AndroidProject/TravelApp/app/src/main/res/layout/fragment_details.xml" value="0.25" />
+        <entry key="..\:/Users/Klap.ir/Documents/android/AndroidProject/TravelApp/app/src/main/res/layout/fragment_details_canada.xml" value="0.184375" />
+        <entry key="..\:/Users/Klap.ir/Documents/android/AndroidProject/TravelApp/app/src/main/res/layout/fragment_details_iran.xml" value="0.184375" />
+        <entry key="..\:/Users/Klap.ir/Documents/android/AndroidProject/TravelApp/app/src/main/res/layout/fragment_details_switzerland.xml" value="0.18541666666666667" />
         <entry key="..\:/Users/Klap.ir/Documents/android/AndroidProject/TravelApp/app/src/main/res/layout/fragment_home.xml" value="0.18541666666666667" />
-        <entry key="..\:/Users/Klap.ir/Documents/android/AndroidProject/TravelApp/app/src/main/res/layout/fragment_iran.xml" value="0.11927083333333334" />
+        <entry key="..\:/Users/Klap.ir/Documents/android/AndroidProject/TravelApp/app/src/main/res/layout/fragment_iran.xml" value="0.18" />
         <entry key="..\:/Users/Klap.ir/Documents/android/AndroidProject/TravelApp/app/src/main/res/layout/fragment_profile.xml" value="0.13" />
         <entry key="..\:/Users/Klap.ir/Documents/android/AndroidProject/TravelApp/app/src/main/res/layout/fragment_switzerland.xml" value="0.15" />
         <entry key="..\:/Users/Klap.ir/Documents/android/AndroidProject/TravelApp/app/src/main/res/layout/header_layout.xml" value="0.16" />
         <entry key="..\:/Users/Klap.ir/Documents/android/AndroidProject/TravelApp/app/src/main/res/layout/item_recyclerview_america.xml" value="0.22" />
+        <entry key="..\:/Users/Klap.ir/Documents/android/AndroidProject/TravelApp/app/src/main/res/layout/item_recyclerview_canada.xml" value="0.22" />
+        <entry key="..\:/Users/Klap.ir/Documents/android/AndroidProject/TravelApp/app/src/main/res/layout/item_recyclerview_iran.xml" value="0.18541666666666667" />
+        <entry key="..\:/Users/Klap.ir/Documents/android/AndroidProject/TravelApp/app/src/main/res/layout/item_recyclerview_switzerland.xml" value="0.18541666666666667" />
         <entry key="..\:/Users/Klap.ir/Documents/android/AndroidProject/TravelApp/app/src/main/res/menu/bottom_ban_menu.xml" value="0.15" />
         <entry key="..\:/Users/Klap.ir/Documents/android/AndroidProject/TravelApp/app/src/main/res/menu/drawer_nav_menu.xml" value="0.15" />
+        <entry key="..\:/Users/Klap.ir/Documents/android/AndroidProject/TravelApp/app/src/main/res/menu/popup_menu.xml" value="0.25025641025641027" />
         <entry key="..\:/Users/Klap.ir/Documents/android/CountriesApp/app/src/main/res/drawable/account.xml" value="0.1935" />
         <entry key="..\:/Users/Klap.ir/Documents/android/CountriesApp/app/src/main/res/drawable/flag.xml" value="0.1705" />
         <entry key="..\:/Users/Klap.ir/Documents/android/CountriesApp/app/src/main/res/font/fonts.xml" value="0.215625" />

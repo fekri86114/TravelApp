@@ -3,19 +3,19 @@
 
     <item
         android:id="@+id/nav_america"
-        android:title="America"
-        android:icon="@drawable/ic_flag"/>
+        android:icon="@drawable/ic_flag"
+        android:title="@string/america" />
     <item
         android:id="@+id/nav_switzerland"
-        android:title="Switzerland"
-        android:icon="@drawable/ic_flag"/>
+        android:icon="@drawable/ic_flag"
+        android:title="@string/switzerland" />
     <item
         android:id="@+id/nav_iran"
-        android:title="Iran"
-        android:icon="@drawable/ic_flag"/>
+        android:icon="@drawable/ic_flag"
+        android:title="@string/iran" />
     <item
         android:id="@+id/nav_canada"
-        android:title="Canada"
-        android:icon="@drawable/ic_flag"/>
+        android:icon="@drawable/ic_flag"
+        android:title="@string/canada" />
 
 </menu>
