@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
@@ -20,18 +21,26 @@ import java.util.List;
 public class AmericaAdapter extends RecyclerView.Adapter<AmericaAdapter.AmericaViewHolder> {
     private final List<AmericaModel> americaModelList;
     public SetOnItemClickListener listener;
+    public SetOnMenuClickListener menuClickListener;
     private int lastPosition = -1;
 
-    public AmericaAdapter(List<AmericaModel> americaModelList, SetOnItemClickListener listener) {
+    public AmericaAdapter(List<AmericaModel> americaModelList, SetOnItemClickListener listener, SetOnMenuClickListener menuClickListener) {
         this.americaModelList = americaModelList;
         this.listener = listener;
+        this.menuClickListener = menuClickListener;
     }
 
-    @NonNull
-    @Override
-    public AmericaViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public static class AmericaViewHolder extends RecyclerView.ViewHolder {
+        private AppCompatTextView textViewAmerica;
+        private AppCompatImageView imageViewAmerica;
+        private AppCompatImageView imageMenu;
 
-        return new AmericaViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recyclerview_america, parent, false));
+        public AmericaViewHolder(@NonNull View itemView) {
+            super(itemView);
+            textViewAmerica = itemView.findViewById(R.id.textview_america);
+            imageViewAmerica = itemView.findViewById(R.id.imageview_america);
+            imageMenu = itemView.findViewById(R.id.imageview_popup_menu);
+        }
     }
 
     @Override
@@ -41,8 +50,15 @@ public class AmericaAdapter extends RecyclerView.Adapter<AmericaAdapter.AmericaV
         holder.textViewAmerica.setText(americaModel.getAmericaName());
         setFadeAnimation(holder.itemView, position);
         holder.itemView.setOnClickListener(view -> listener.ItemClicked(americaModel));
+        holder.imageMenu.setOnClickListener(view -> menuClickListener.MenuClicked(holder.imageMenu));
     }
 
+    @NonNull
+    @Override
+    public AmericaViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
+        return new AmericaViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recyclerview_america, parent, false));
+    }
 
     private void setFadeAnimation(View viewToAnimate, int position) {
         // If the bound view wasn't previously displayed on screen, it's animated
@@ -53,21 +69,14 @@ public class AmericaAdapter extends RecyclerView.Adapter<AmericaAdapter.AmericaV
         }
     }
 
-    public static class AmericaViewHolder extends RecyclerView.ViewHolder {
-        private final AppCompatTextView textViewAmerica;
-        private final AppCompatImageView imageViewAmerica;
-
-        public AmericaViewHolder(@NonNull View itemView) {
-            super(itemView);
-            textViewAmerica = itemView.findViewById(R.id.textview_america);
-            imageViewAmerica = itemView.findViewById(R.id.imageview_america);
-        }
-    }
     @Override
     public int getItemCount() {
         return americaModelList.size();
     }
     public interface SetOnItemClickListener{
         void ItemClicked(AmericaModel americaModel);
+    }
+    public interface SetOnMenuClickListener{
+        void MenuClicked(View view);
     }
 }

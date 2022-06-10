@@ -1,5 +1,6 @@
 package com.app.countriesapp.ui.fragments;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,10 +12,13 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupMenu;
+import android.widget.Toast;
 
 import com.app.countriesapp.R;
 import com.app.countriesapp.databinding.FragmentIranBinding;
 import com.app.countriesapp.databinding.FragmentSwitzerlandBinding;
+import com.app.countriesapp.ui.dialog.DeleteBottomSheetDialog;
 import com.app.countriesapp.ux.adapter.IranAdapter;
 import com.app.countriesapp.ux.adapter.SwitzerlandAdapter;
 import com.app.countriesapp.ux.model.IranModel;
@@ -24,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class SwitzerlandFragment extends Fragment implements SwitzerlandAdapter.SetOnItemClickListener{
+public class SwitzerlandFragment extends Fragment implements SwitzerlandAdapter.SetOnItemClickListener, SwitzerlandAdapter.SetOnMenuClickListenerSwitzerland {
 
     private FragmentSwitzerlandBinding binding;
     private SwitzerlandAdapter switzerlandAdapter;
@@ -43,7 +47,7 @@ public class SwitzerlandFragment extends Fragment implements SwitzerlandAdapter.
     }
 
     private void setupRecyclerview() {
-        switzerlandAdapter = new SwitzerlandAdapter(setListData(), this);
+        switzerlandAdapter = new SwitzerlandAdapter(setListData(), this, this);
         binding.recyclerviewIran.setHasFixedSize(true);
         binding.recyclerviewIran.setLayoutManager(new GridLayoutManager(getContext(), 2));
         binding.recyclerviewIran.setAdapter(switzerlandAdapter);
@@ -74,5 +78,42 @@ public class SwitzerlandFragment extends Fragment implements SwitzerlandAdapter.
         Bundle bundle = new Bundle();
         bundle.putSerializable("SWITZERLAND_MODEL", switzerlandModel);
         Navigation.findNavController(binding.getRoot()).navigate(R.id.action_nav_switzerland_to_detailsFragmentSwitzerland, bundle);
+    }
+
+    @Override
+    public void MenuClickedSwitzerland(View view) {
+        showPopupMenuSwitzerland(view);
+    }
+    private void showPopupMenuSwitzerland(View view){
+        PopupMenu popupMenu = new PopupMenu(getContext(), view);
+        popupMenu.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(menuItem ->{
+            switch (menuItem.getItemId()){
+                case R.id.delete:
+                    showDeleteBottomSheetSwitzerland();
+                    break;
+                case R.id.set_wallpaper:
+                    showDialogSetAsWallpaperSwitzerland();
+                    break;
+            }
+            return true;
+        });
+        popupMenu.show();
+    }
+    private void showDeleteBottomSheetSwitzerland(){
+        DeleteBottomSheetDialog bottomSheetDialog = new DeleteBottomSheetDialog();
+        bottomSheetDialog.show(getChildFragmentManager(), "DELETE_BOTTOM_SHEET_DIALOG");
+    }
+    private void showDialogSetAsWallpaperSwitzerland(){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+        alertDialog.setTitle(R.string.set_as_wallpaper);
+        alertDialog.setMessage(R.string.dialog_message);
+        alertDialog.setPositiveButton("YES", (dialogInterface, i) ->setAsWallpaper());
+        alertDialog.setNegativeButton("NO", (dialogInterface, i) -> dialogInterface.cancel());
+        AlertDialog dialog = alertDialog.create();
+        dialog.show();
+    }
+    private void setAsWallpaper(){
+        Toast.makeText(getContext(), "YESSS!!!", Toast.LENGTH_SHORT).show();
     }
 }

@@ -1,6 +1,6 @@
 package com.app.countriesapp.ui.fragments;
-
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,10 +12,13 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupMenu;
+import android.widget.Toast;
 
 import com.app.countriesapp.R;
 import com.app.countriesapp.databinding.FragmentCanadaBinding;
 import com.app.countriesapp.databinding.FragmentIranBinding;
+import com.app.countriesapp.ui.dialog.DeleteBottomSheetDialog;
 import com.app.countriesapp.ux.adapter.CanadaAdapter;
 import com.app.countriesapp.ux.adapter.IranAdapter;
 import com.app.countriesapp.ux.model.CanadaModel;
@@ -23,8 +26,7 @@ import com.app.countriesapp.ux.model.IranModel;
 
 import java.util.ArrayList;
 import java.util.List;
-
-public class IranFragment extends Fragment implements IranAdapter.SetOnItemClickListener{
+public class IranFragment extends Fragment implements IranAdapter.SetOnItemClickListener, IranAdapter.setOnMenuClickListenerIran{
 
     private FragmentIranBinding binding;
     private IranAdapter iranAdapter;
@@ -43,7 +45,7 @@ public class IranFragment extends Fragment implements IranAdapter.SetOnItemClick
     }
 
     private void setupRecyclerview() {
-        iranAdapter = new IranAdapter(setListData(), this);
+        iranAdapter = new IranAdapter(setListData(), this, this);
         binding.recyclerviewIran.setHasFixedSize(true);
         binding.recyclerviewIran.setLayoutManager(new GridLayoutManager(getContext(), 2));
         binding.recyclerviewIran.setAdapter(iranAdapter);
@@ -68,11 +70,46 @@ public class IranFragment extends Fragment implements IranAdapter.SetOnItemClick
 
         return listItem;
     }
-
     @Override
     public void ItemClickedIran(IranModel iranModel) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("IRAN_MODEL", iranModel);
         Navigation.findNavController(binding.getRoot()).navigate(R.id.action_nav_iran_to_detailsFragmentIran, bundle);
+    }
+    @Override
+    public void MenuClickedIran(View view) {
+        showPopUpMenuIran(view);
+    }
+    private void showPopUpMenuIran(View view){
+        PopupMenu popupMenu = new PopupMenu(getContext(), view);
+        popupMenu.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(menuItem ->{
+            switch (menuItem.getItemId()){
+                case R.id.delete:
+                    showDeleteBottomSheetIran();
+                    break;
+                case R.id.set_wallpaper:
+                    showDialogSetAsWallpaperIran();
+                    break;
+            }
+            return true;
+        });
+        popupMenu.show();
+    }
+    private void showDeleteBottomSheetIran(){
+        DeleteBottomSheetDialog bottomSheetDialog = new DeleteBottomSheetDialog();
+        bottomSheetDialog.show(getChildFragmentManager(), "DELETE_BOTTOM_SHEET_DIALOG");
+    }
+    private void showDialogSetAsWallpaperIran(){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+        alertDialog.setTitle(R.string.set_as_wallpaper);
+        alertDialog.setMessage(R.string.dialog_message);
+        alertDialog.setPositiveButton("YES", (dialogInterface, i) ->setAsWallpaper());
+        alertDialog.setNegativeButton("NO", (dialogInterface, i) -> dialogInterface.cancel());
+        AlertDialog dialog = alertDialog.create();
+        dialog.show();
+    }
+    private void setAsWallpaper(){
+        Toast.makeText(getContext(), "YESSS!!!", Toast.LENGTH_SHORT).show();
     }
 }

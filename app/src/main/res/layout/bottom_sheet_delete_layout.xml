@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/spacing_5x"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textview_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/spacing_5x"
+        android:layout_marginEnd="@dimen/spacing_5x"
+        android:layout_marginStart="@dimen/spacing_5x"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/are_you_sure_that_you_want_to_delete_this_item"
+        android:gravity="center"
+        android:layout_margin="@dimen/spacing_2x"
+        style="@style/TextViewBlackBold"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/darker_gray"
+        android:textColor="@color/primaryTextColor"
+        android:layout_margin="@dimen/spacing_2x"
+        app:layout_constraintEnd_toStartOf="@id/button_confirm"
+        app:layout_constraintTop_toBottomOf="@id/textview_message"
+        app:layout_constraintStart_toStartOf="@id/textview_message"
+        android:text="@string/cancel"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_confirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/primaryDarkColor"
+        android:textColor="@color/primaryTextColor"
+        android:layout_margin="@dimen/spacing_2x"
+        app:layout_constraintStart_toEndOf="@id/button_cancel"
+        app:layout_constraintTop_toBottomOf="@id/textview_message"
+        app:layout_constraintEnd_toEndOf="@id/textview_message"
+        android:text="@string/confirm"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

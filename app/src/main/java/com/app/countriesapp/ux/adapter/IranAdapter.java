@@ -23,14 +23,27 @@ import java.util.List;
 public class IranAdapter extends RecyclerView.Adapter<IranAdapter.IranViewHolder> {
     private final List<IranModel> iranModelList;
     public IranAdapter.SetOnItemClickListener listener;
+    public setOnMenuClickListenerIran menuClickListenerIran;
     private int lastPosition = -1;
 
-    public IranAdapter(List<IranModel> iranModelList, IranAdapter.SetOnItemClickListener listener) {
+    public IranAdapter(List<IranModel> iranModelList, IranAdapter.SetOnItemClickListener listener,setOnMenuClickListenerIran menuClickListenerIran) {
         this.iranModelList = iranModelList;
         this.listener = listener;
+        this.menuClickListenerIran = menuClickListenerIran;
     }
 
+    public static class IranViewHolder extends RecyclerView.ViewHolder {
+        private final AppCompatTextView textViewIran;
+        private final AppCompatImageView imageViewIran;
+        private final AppCompatImageView imageMenuIran;
 
+        public IranViewHolder(@NonNull View itemView) {
+            super(itemView);
+            textViewIran = itemView.findViewById(R.id.textview_iran);
+            imageViewIran = itemView.findViewById(R.id.imageview_iran);
+            imageMenuIran = itemView.findViewById(R.id.imageview_popup_menu_iran);
+        }
+    }
 
     @NonNull
     @Override
@@ -46,6 +59,8 @@ public class IranAdapter extends RecyclerView.Adapter<IranAdapter.IranViewHolder
         holder.textViewIran.setText(iranModel.getIranName());
         setFadeAnimation(holder.itemView, position);
         holder.itemView.setOnClickListener(view -> listener.ItemClickedIran(iranModel));
+        holder.imageMenuIran.setOnClickListener(view -> menuClickListenerIran.MenuClickedIran(holder.imageMenuIran));
+
     }
 
     private void setFadeAnimation(View viewToAnimate, int position) {
@@ -57,21 +72,14 @@ public class IranAdapter extends RecyclerView.Adapter<IranAdapter.IranViewHolder
         }
     }
 
-    public static class IranViewHolder extends RecyclerView.ViewHolder {
-        private final AppCompatTextView textViewIran;
-        private final AppCompatImageView imageViewIran;
-
-        public IranViewHolder(@NonNull View itemView) {
-            super(itemView);
-            textViewIran = itemView.findViewById(R.id.textview_iran);
-            imageViewIran = itemView.findViewById(R.id.imageview_iran);
-        }
-    }
     @Override
     public int getItemCount() {
         return iranModelList.size();
     }
     public interface SetOnItemClickListener{
         void ItemClickedIran(IranModel iranModel);
+    }
+    public interface  setOnMenuClickListenerIran{
+        void MenuClickedIran(View view);
     }
 }

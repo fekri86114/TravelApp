@@ -1,5 +1,5 @@
 package com.app.countriesapp.ui.fragments;
-
+import android.app.AlertDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,11 +11,13 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.app.countriesapp.R;
 import com.app.countriesapp.databinding.FragmentAmericaBinding;
 import com.app.countriesapp.databinding.FragmentCanadaBinding;
+import com.app.countriesapp.ui.dialog.DeleteBottomSheetDialog;
 import com.app.countriesapp.ux.adapter.AmericaAdapter;
 import com.app.countriesapp.ux.adapter.CanadaAdapter;
 import com.app.countriesapp.ux.model.AmericaModel;
@@ -23,8 +25,7 @@ import com.app.countriesapp.ux.model.CanadaModel;
 
 import java.util.ArrayList;
 import java.util.List;
-
-public class CanadaFragment extends Fragment implements CanadaAdapter.SetOnItemClickListener{
+public class CanadaFragment extends Fragment implements CanadaAdapter.SetOnItemClickListener, CanadaAdapter.SetOnMenuClickListenerCanada {
 
     private FragmentCanadaBinding binding;
     private CanadaAdapter canadaAdapter;
@@ -43,7 +44,7 @@ public class CanadaFragment extends Fragment implements CanadaAdapter.SetOnItemC
     }
 
     private void setupRecyclerview() {
-        canadaAdapter = new CanadaAdapter(setListData(), this);
+        canadaAdapter = new CanadaAdapter(setListData(), this, this);
         binding.recyclerviewCanada.setHasFixedSize(true);
         binding.recyclerviewCanada.setLayoutManager(new GridLayoutManager(getContext(), 2));
         binding.recyclerviewCanada.setAdapter(canadaAdapter);
@@ -74,5 +75,42 @@ public class CanadaFragment extends Fragment implements CanadaAdapter.SetOnItemC
         Bundle bundle = new Bundle();
         bundle.putSerializable("CANADA_MODEL", canadaModel);
         Navigation.findNavController(binding.getRoot()).navigate(R.id.action_nav_canada_to_detailsFragmentCanada, bundle);
+    }
+
+    @Override
+    public void MenuClickedCanada(View view) {
+        showPopupMenuCanada(view);
+    }
+    private void showPopupMenuCanada(View view){
+        PopupMenu popupMenu = new PopupMenu(getContext(), view);
+        popupMenu.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(menuItem ->{
+            switch (menuItem.getItemId()){
+                case R.id.delete:
+                    showDeleteBottomSheetCanada();
+                    break;
+                case R.id.set_wallpaper:
+                    showDialogSetAsWallpaperCanada();
+                    break;
+            }
+            return true;
+        });
+        popupMenu.show();
+    }
+    private void showDeleteBottomSheetCanada(){
+        DeleteBottomSheetDialog bottomSheetDialog = new DeleteBottomSheetDialog();
+        bottomSheetDialog.show(getChildFragmentManager(), "DELETE_BOTTOM_SHEET_DIALOG");
+    }
+    private void showDialogSetAsWallpaperCanada(){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+        alertDialog.setTitle(R.string.set_as_wallpaper);
+        alertDialog.setMessage(R.string.dialog_message);
+        alertDialog.setPositiveButton("YES", (dialogInterface, i) ->setAsWallpaper());
+        alertDialog.setNegativeButton("NO", (dialogInterface, i) -> dialogInterface.cancel());
+        AlertDialog dialog = alertDialog.create();
+        dialog.show();
+    }
+    private void setAsWallpaper(){
+        Toast.makeText(getContext(), "YESSS!!!", Toast.LENGTH_SHORT).show();
     }
 }
