@@ -20,18 +20,27 @@ import java.util.List;
 public class CanadaAdapter extends RecyclerView.Adapter<CanadaAdapter.CanadaViewHolder> {
     private final List<CanadaModel> canadaModelList;
     public SetOnItemClickListener listener;
+    public SetOnMenuClickListenerCanada menuClickListenerCanada;
     private int lastPosition = -1;
 
-    public CanadaAdapter(List<CanadaModel> canadaModelList, SetOnItemClickListener listener) {
+    public CanadaAdapter(List<CanadaModel> canadaModelList, SetOnItemClickListener listener, SetOnMenuClickListenerCanada menuClickListenerCanada) {
         this.canadaModelList = canadaModelList;
         this.listener = listener;
+        this.menuClickListenerCanada = menuClickListenerCanada;
     }
 
-    @NonNull
-    @Override
-    public CanadaViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public static class CanadaViewHolder extends RecyclerView.ViewHolder {
+        private final AppCompatTextView textViewCanada;
+        private final AppCompatImageView imageViewCanada;
+        private AppCompatImageView imageMenuCanada;
 
-        return new CanadaViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recyclerview_canada, parent, false));
+
+        public CanadaViewHolder(@NonNull View itemView) {
+            super(itemView);
+            textViewCanada = itemView.findViewById(R.id.textview_canada);
+            imageViewCanada = itemView.findViewById(R.id.imageview_canada);
+            imageMenuCanada = itemView.findViewById(R.id.imageview_popup_menu_canada);
+        }
     }
 
     @Override
@@ -41,8 +50,15 @@ public class CanadaAdapter extends RecyclerView.Adapter<CanadaAdapter.CanadaView
         holder.textViewCanada.setText(canadaModel.getCanadaName());
         setFadeAnimation(holder.itemView, position);
         holder.itemView.setOnClickListener(view -> listener.ItemClickedCanada(canadaModel));
+        holder.imageMenuCanada.setOnClickListener(view -> menuClickListenerCanada.MenuClickedCanada(holder.imageMenuCanada));
     }
 
+    @NonNull
+    @Override
+    public CanadaViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
+        return new CanadaViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recyclerview_canada, parent, false));
+    }
 
     private void setFadeAnimation(View viewToAnimate, int position) {
         // If the bound view wasn't previously displayed on screen, it's animated
@@ -53,21 +69,14 @@ public class CanadaAdapter extends RecyclerView.Adapter<CanadaAdapter.CanadaView
         }
     }
 
-    public static class CanadaViewHolder extends RecyclerView.ViewHolder {
-        private final AppCompatTextView textViewCanada;
-        private final AppCompatImageView imageViewCanada;
-
-        public CanadaViewHolder(@NonNull View itemView) {
-            super(itemView);
-            textViewCanada = itemView.findViewById(R.id.textview_canada);
-            imageViewCanada = itemView.findViewById(R.id.imageview_canada);
-        }
-    }
     @Override
     public int getItemCount() {
         return canadaModelList.size();
     }
     public interface SetOnItemClickListener{
         void ItemClickedCanada(CanadaModel canadaModel);
+    }
+    public interface SetOnMenuClickListenerCanada{
+        void MenuClickedCanada(View view);
     }
 }

@@ -21,13 +21,26 @@ import java.util.List;
 public class SwitzerlandAdapter extends RecyclerView.Adapter<SwitzerlandAdapter.SwitzerlandViewHolder> {
     private final List<SwitzerlandModel> switzerlandModelList;
     public SwitzerlandAdapter.SetOnItemClickListener listener;
+    public SwitzerlandAdapter.SetOnMenuClickListenerSwitzerland menuClickListenerSwitzerland;
     private int lastPosition = -1;
 
-    public SwitzerlandAdapter(List<SwitzerlandModel> switzerlandModelList, SwitzerlandAdapter.SetOnItemClickListener listener) {
+    public SwitzerlandAdapter(List<SwitzerlandModel> switzerlandModelList, SwitzerlandAdapter.SetOnItemClickListener listener, SetOnMenuClickListenerSwitzerland menuClickListenerSwitzerland) {
         this.switzerlandModelList = switzerlandModelList;
         this.listener = listener;
+        this.menuClickListenerSwitzerland = menuClickListenerSwitzerland;
     }
+    public static class SwitzerlandViewHolder extends RecyclerView.ViewHolder {
+        private final AppCompatTextView textViewSwitzerland;
+        private final AppCompatImageView imageViewSwitzerland;
+        private final AppCompatImageView imageMenuSwitzerland;
 
+        public SwitzerlandViewHolder(@NonNull View itemView) {
+            super(itemView);
+            textViewSwitzerland = itemView.findViewById(R.id.textview_switzerland);
+            imageViewSwitzerland = itemView.findViewById(R.id.imageview_switzerland);
+            imageMenuSwitzerland = itemView.findViewById(R.id.imageview_popup_menu_switzerland);
+        }
+    }
     @NonNull
     @Override
     public SwitzerlandAdapter.SwitzerlandViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -42,6 +55,7 @@ public class SwitzerlandAdapter extends RecyclerView.Adapter<SwitzerlandAdapter.
         holder.textViewSwitzerland.setText(switzerlandModel.getSwitzerlandName());
         setFadeAnimation(holder.itemView, position);
         holder.itemView.setOnClickListener(view -> listener.ItemClickedSwitzerland(switzerlandModel));
+        holder.imageMenuSwitzerland.setOnClickListener(view -> menuClickListenerSwitzerland.MenuClickedSwitzerland(holder.imageMenuSwitzerland));
     }
 
     private void setFadeAnimation(View viewToAnimate, int position) {
@@ -53,21 +67,14 @@ public class SwitzerlandAdapter extends RecyclerView.Adapter<SwitzerlandAdapter.
         }
     }
 
-    public static class SwitzerlandViewHolder extends RecyclerView.ViewHolder {
-        private final AppCompatTextView textViewSwitzerland;
-        private final AppCompatImageView imageViewSwitzerland;
-
-        public SwitzerlandViewHolder(@NonNull View itemView) {
-            super(itemView);
-            textViewSwitzerland = itemView.findViewById(R.id.textview_switzerland);
-            imageViewSwitzerland = itemView.findViewById(R.id.imageview_switzerland);
-        }
-    }
     @Override
     public int getItemCount() {
         return switzerlandModelList.size();
     }
     public interface SetOnItemClickListener{
         void ItemClickedSwitzerland(SwitzerlandModel switzerlandModel);
+    }
+    public interface SetOnMenuClickListenerSwitzerland{
+        void MenuClickedSwitzerland(View view);
     }
 }

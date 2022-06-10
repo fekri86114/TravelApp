@@ -1,11 +1,15 @@
 package com.app.countriesapp.ui.fragments;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupMenu;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,6 +19,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.app.countriesapp.R;
 import com.app.countriesapp.databinding.FragmentAmericaBinding;
+import com.app.countriesapp.ui.dialog.DeleteBottomSheetDialog;
 import com.app.countriesapp.ux.adapter.AmericaAdapter;
 import com.app.countriesapp.ux.model.AmericaModel;
 
@@ -58,7 +63,7 @@ public class AmericaFragment extends Fragment implements AmericaAdapter.SetOnIte
         listItem.add(new AmericaModel("https://media.glassdoor.com/l/77/d1/ca/78/harvard-university.jpg", "Harvard University"));
         listItem.add(new AmericaModel("https://cdnapisec.kaltura.com/p/537811/thumbnail/entry_id/1_7vli4o6f/width/1280/height/720", "Cornell University"));
         listItem.add(new AmericaModel("https://static01.nyt.com/images/2020/03/08/nyregion/08xp-columbia1/08xp-columbia1-videoSixteenByNineJumbo1600.jpg", "Colombia University"));
-        listItem.add(new AmericaModel("https://news.virginia.edu/sites/default/files/article_image/spring-2021-header_ss.jpg", "University of Virginia"));
+        listItem.add(new AmericaModel("https://ezapply.ir/sliders/slider_1597898328.jfif", "University of Virginia"));
         listItem.add(new AmericaModel("https://applyplus.org/img/University/13-12-2019-1576256632.jpg", "Stanford University"));
         listItem.add(new AmericaModel("http://ezapply.ir/sliders/slider_1597861061.png", "Duke University"));
         listItem.add(new AmericaModel("https://ezapply.ir/sliders/slider_1493112852.jpeg", "University of Illinois at Chicago"));
@@ -77,24 +82,36 @@ public class AmericaFragment extends Fragment implements AmericaAdapter.SetOnIte
     public void MenuClicked(View view) {
         showPopupMenu(view);
     }
-
     private void showPopupMenu(View view) {
         PopupMenu popupMenu = new PopupMenu(getContext(), view);
         popupMenu.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                switch (menuItem.getItemId()) {
-                    case R.id.delete:
-
-                        break;
-                    case R.id.set_wallpaper:
-
-                        break;
-                }
-                return true;
+        popupMenu.setOnMenuItemClickListener(menuItem -> {
+            switch (menuItem.getItemId()) {
+                case R.id.delete:
+                    showDeleteBottomSheet();
+                    break;
+                case R.id.set_wallpaper:
+                    showDialogSetAsWallpaper();
+                    break;
             }
+            return true;
         });
         popupMenu.show();
+    }
+    private void showDeleteBottomSheet(){
+        DeleteBottomSheetDialog bottomSheetDialog = new DeleteBottomSheetDialog();
+        bottomSheetDialog.show(getChildFragmentManager(), "DELETE_BOTTOM_SHEET_DIALOG");
+    }
+    private void showDialogSetAsWallpaper(){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+        alertDialog.setTitle(R.string.set_as_wallpaper);
+        alertDialog.setMessage(R.string.dialog_message);
+        alertDialog.setPositiveButton("YES", (dialogInterface, i) ->setAsWallpaper());
+        alertDialog.setNegativeButton("NO", (dialogInterface, i) -> dialogInterface.cancel());
+        AlertDialog dialog = alertDialog.create();
+        dialog.show();
+    }
+    private void setAsWallpaper(){
+        Toast.makeText(getContext(), "YESSSS!!!", Toast.LENGTH_SHORT).show();
     }
 }

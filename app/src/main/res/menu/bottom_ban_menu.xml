@@ -6,6 +6,10 @@
         android:icon="@drawable/ic_flag"
         android:title="@string/america" />
     <item
+        android:id="@+id/nav_canada"
+        android:icon="@drawable/ic_flag"
+        android:title="@string/canada" />
+    <item
         android:id="@+id/nav_switzerland"
         android:icon="@drawable/ic_flag"
         android:title="@string/switzerland" />
@@ -13,9 +17,5 @@
         android:id="@+id/nav_iran"
         android:icon="@drawable/ic_flag"
         android:title="@string/iran" />
-    <item
-        android:id="@+id/nav_canada"
-        android:icon="@drawable/ic_flag"
-        android:title="@string/canada" />
 
 </menu>
