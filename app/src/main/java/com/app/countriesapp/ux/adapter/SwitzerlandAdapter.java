@@ -54,7 +54,7 @@ public class SwitzerlandAdapter extends RecyclerView.Adapter<SwitzerlandAdapter.
         Glide.with(holder.itemView.getContext()).load(switzerlandModel.getSwitzerlandImage()).into(holder.imageViewSwitzerland);
         holder.textViewSwitzerland.setText(switzerlandModel.getSwitzerlandName());
         setFadeAnimation(holder.itemView, position);
-        holder.itemView.setOnClickListener(view -> listener.ItemClickedSwitzerland(switzerlandModel));
+        holder.itemView.setOnClickListener(view -> listener.ItemClickedSwitzerland(switzerlandModel, position));
         holder.imageMenuSwitzerland.setOnClickListener(view -> menuClickListenerSwitzerland.MenuClickedSwitzerland(holder.imageMenuSwitzerland));
     }
 
@@ -72,9 +72,15 @@ public class SwitzerlandAdapter extends RecyclerView.Adapter<SwitzerlandAdapter.
         return switzerlandModelList.size();
     }
     public interface SetOnItemClickListener{
-        void ItemClickedSwitzerland(SwitzerlandModel switzerlandModel);
+        void ItemClickedSwitzerland(SwitzerlandModel switzerlandModel, int position);
     }
     public interface SetOnMenuClickListenerSwitzerland{
         void MenuClickedSwitzerland(View view);
+    }
+    public void deleteItem(int position){
+        switzerlandModelList.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, getItemCount());
+
     }
 }

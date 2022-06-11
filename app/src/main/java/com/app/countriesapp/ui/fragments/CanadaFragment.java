@@ -1,5 +1,7 @@
 package com.app.countriesapp.ui.fragments;
 import android.app.AlertDialog;
+import android.app.WallpaperManager;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -22,13 +24,20 @@ import com.app.countriesapp.ux.adapter.AmericaAdapter;
 import com.app.countriesapp.ux.adapter.CanadaAdapter;
 import com.app.countriesapp.ux.model.AmericaModel;
 import com.app.countriesapp.ux.model.CanadaModel;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-public class CanadaFragment extends Fragment implements CanadaAdapter.SetOnItemClickListener, CanadaAdapter.SetOnMenuClickListenerCanada {
+public class CanadaFragment extends Fragment implements CanadaAdapter.SetOnItemClickListener, CanadaAdapter.SetOnMenuClickListenerCanada, DeleteBottomSheetDialog.OnDeleteItemListener {
 
     private FragmentCanadaBinding binding;
     private CanadaAdapter canadaAdapter;
+    private int position;
+    private DeleteBottomSheetDialog bottomSheetDialog;
+    List<CanadaModel> listItem;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,7 +60,7 @@ public class CanadaFragment extends Fragment implements CanadaAdapter.SetOnItemC
     }
 
     private List<CanadaModel> setListData(){
-        List<CanadaModel> listItem = new ArrayList<>();
+        listItem = new ArrayList<>();
         listItem.add(new CanadaModel("http://cdn.cnn.com/cnnnext/dam/assets/140630124917-12-canada-most-beautiful-places.jpg", "Night"));
         listItem.add(new CanadaModel("https://globalgrasshopper.com/wp-content/uploads/2012/11/The-Rockies-Canada.jpg", "Mountain"));
         listItem.add(new CanadaModel("https://img.theculturetrip.com/wp-content/uploads/2021/05/kbace2-e1623920797764.jpg", "Light City"));
@@ -71,7 +80,8 @@ public class CanadaFragment extends Fragment implements CanadaAdapter.SetOnItemC
     }
 
     @Override
-    public void ItemClickedCanada(CanadaModel canadaModel) {
+    public void ItemClickedCanada(CanadaModel canadaModel, int position) {
+        this.position = position;
         Bundle bundle = new Bundle();
         bundle.putSerializable("CANADA_MODEL", canadaModel);
         Navigation.findNavController(binding.getRoot()).navigate(R.id.action_nav_canada_to_detailsFragmentCanada, bundle);
@@ -98,7 +108,7 @@ public class CanadaFragment extends Fragment implements CanadaAdapter.SetOnItemC
         popupMenu.show();
     }
     private void showDeleteBottomSheetCanada(){
-        DeleteBottomSheetDialog bottomSheetDialog = new DeleteBottomSheetDialog();
+        bottomSheetDialog = new DeleteBottomSheetDialog();
         bottomSheetDialog.show(getChildFragmentManager(), "DELETE_BOTTOM_SHEET_DIALOG");
     }
     private void showDialogSetAsWallpaperCanada(){
@@ -111,6 +121,26 @@ public class CanadaFragment extends Fragment implements CanadaAdapter.SetOnItemC
         dialog.show();
     }
     private void setAsWallpaper(){
-        Toast.makeText(getContext(), "YESSS!!!", Toast.LENGTH_SHORT).show();
+        Glide.with(requireContext())
+                .asBitmap()
+                .load(listItem.get(position).getCanadaImage())
+                .into(new SimpleTarget<Bitmap>() {
+
+                    @Override
+                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+
+                        try {
+                            WallpaperManager.getInstance(requireContext()).setBitmap(resource);
+                            Toast.makeText(requireContext(), "Set as wallpaper is success!!", Toast.LENGTH_SHORT).show();
+                        } catch (IOException e) {
+                            Toast.makeText(requireContext(), "Set as wallpaper is not success", Toast.LENGTH_SHORT).show();
+                            e.printStackTrace();
+                        }
+                    }
+                });
+    }
+    public void onItemDelete(){
+        canadaAdapter.deleteItem(position);
+        bottomSheetDialog.dismiss();
     }
 }

@@ -58,7 +58,7 @@ public class IranAdapter extends RecyclerView.Adapter<IranAdapter.IranViewHolder
         Glide.with(holder.itemView.getContext()).load(iranModel.getIranImage()).into(holder.imageViewIran);
         holder.textViewIran.setText(iranModel.getIranName());
         setFadeAnimation(holder.itemView, position);
-        holder.itemView.setOnClickListener(view -> listener.ItemClickedIran(iranModel));
+        holder.itemView.setOnClickListener(view -> listener.ItemClickedIran(iranModel, position));
         holder.imageMenuIran.setOnClickListener(view -> menuClickListenerIran.MenuClickedIran(holder.imageMenuIran));
 
     }
@@ -76,10 +76,17 @@ public class IranAdapter extends RecyclerView.Adapter<IranAdapter.IranViewHolder
     public int getItemCount() {
         return iranModelList.size();
     }
+
     public interface SetOnItemClickListener{
-        void ItemClickedIran(IranModel iranModel);
+        void ItemClickedIran(IranModel iranModel, int position);
     }
     public interface  setOnMenuClickListenerIran{
         void MenuClickedIran(View view);
+    }
+    public void deleteItem(int position){
+        iranModelList.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, getItemCount());
+
     }
 }

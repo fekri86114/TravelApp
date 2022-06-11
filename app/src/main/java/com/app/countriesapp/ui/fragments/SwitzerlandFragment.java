@@ -1,6 +1,8 @@
 package com.app.countriesapp.ui.fragments;
 
 import android.app.AlertDialog;
+import android.app.WallpaperManager;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -23,15 +25,22 @@ import com.app.countriesapp.ux.adapter.IranAdapter;
 import com.app.countriesapp.ux.adapter.SwitzerlandAdapter;
 import com.app.countriesapp.ux.model.IranModel;
 import com.app.countriesapp.ux.model.SwitzerlandModel;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class SwitzerlandFragment extends Fragment implements SwitzerlandAdapter.SetOnItemClickListener, SwitzerlandAdapter.SetOnMenuClickListenerSwitzerland {
+public class SwitzerlandFragment extends Fragment implements SwitzerlandAdapter.SetOnItemClickListener, SwitzerlandAdapter.SetOnMenuClickListenerSwitzerland, DeleteBottomSheetDialog.OnDeleteItemListener {
 
     private FragmentSwitzerlandBinding binding;
     private SwitzerlandAdapter switzerlandAdapter;
+    private int position;
+    private DeleteBottomSheetDialog bottomSheetDialog;
+    private List<SwitzerlandModel> listItem;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -54,7 +63,7 @@ public class SwitzerlandFragment extends Fragment implements SwitzerlandAdapter.
     }
 
     private List<SwitzerlandModel> setListData(){
-        List<SwitzerlandModel> listItem = new ArrayList<>();
+        listItem = new ArrayList<>();
         listItem.add(new SwitzerlandModel("https://www.wanderluststorytellers.com/wp-content/uploads/2017/10/Most-Beautiful-Places-in-Switzerland-1080x720.jpg", "Beautiful Place"));
         listItem.add(new SwitzerlandModel("https://www.wanderluststorytellers.com/wp-content/uploads/2017/10/Jungfraujoch-Switzerland_thumb-1-e1596513224915.jpg", "Mountain and Train"));
         listItem.add(new SwitzerlandModel("https://www.wanderluststorytellers.com/wp-content/uploads/2017/10/Interlaken-Switzerland-e1596513366524.jpg", "Homes"));
@@ -74,7 +83,8 @@ public class SwitzerlandFragment extends Fragment implements SwitzerlandAdapter.
     }
 
     @Override
-    public void ItemClickedSwitzerland(SwitzerlandModel switzerlandModel) {
+    public void ItemClickedSwitzerland(SwitzerlandModel switzerlandModel, int position) {
+        this.position = position;
         Bundle bundle = new Bundle();
         bundle.putSerializable("SWITZERLAND_MODEL", switzerlandModel);
         Navigation.findNavController(binding.getRoot()).navigate(R.id.action_nav_switzerland_to_detailsFragmentSwitzerland, bundle);
@@ -101,7 +111,7 @@ public class SwitzerlandFragment extends Fragment implements SwitzerlandAdapter.
         popupMenu.show();
     }
     private void showDeleteBottomSheetSwitzerland(){
-        DeleteBottomSheetDialog bottomSheetDialog = new DeleteBottomSheetDialog();
+        bottomSheetDialog = new DeleteBottomSheetDialog();
         bottomSheetDialog.show(getChildFragmentManager(), "DELETE_BOTTOM_SHEET_DIALOG");
     }
     private void showDialogSetAsWallpaperSwitzerland(){
@@ -114,6 +124,28 @@ public class SwitzerlandFragment extends Fragment implements SwitzerlandAdapter.
         dialog.show();
     }
     private void setAsWallpaper(){
-        Toast.makeText(getContext(), "YESSS!!!", Toast.LENGTH_SHORT).show();
+        Glide.with(requireContext())
+                .asBitmap()
+                .load(listItem.get(position).getSwitzerlandImage())
+                .into(new SimpleTarget<Bitmap>() {
+
+                    @Override
+                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+
+                        try {
+                            WallpaperManager.getInstance(requireContext()).setBitmap(resource);
+                            Toast.makeText(requireContext(), "Set as wallpaper is success!!", Toast.LENGTH_SHORT).show();
+                        } catch (IOException e) {
+                            Toast.makeText(requireContext(), "Set as wallpaper is not success", Toast.LENGTH_SHORT).show();
+                            e.printStackTrace();
+                        }
+                    }
+                });
+    }
+
+    @Override
+    public void onItemDelete() {
+        switzerlandAdapter.deleteItem(position);
+        bottomSheetDialog.dismiss();
     }
 }

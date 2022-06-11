@@ -1,6 +1,8 @@
 package com.app.countriesapp.ui.dialog;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +15,22 @@ import com.app.countriesapp.databinding.BottomSheetDeleteLayoutBinding;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 public class DeleteBottomSheetDialog extends BottomSheetDialogFragment {
+
+    private static final String TAG = "DeleteBottomSheetDialog";
     private BottomSheetDeleteLayoutBinding binding;
+    private OnDeleteItemListener onDeleteItemListener;
+
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        try {
+            onDeleteItemListener = (OnDeleteItemListener) getParentFragment();
+
+        } catch(Exception e) {
+            Log.i(TAG, "onAttach: " + e.getMessage());
+        }
+    }
 
     @Nullable
     @Override
@@ -29,8 +46,10 @@ public class DeleteBottomSheetDialog extends BottomSheetDialogFragment {
             dismiss();
         });
         binding.buttonConfirm.setOnClickListener(it -> {
-            Toast.makeText(getContext(), "Confirm", Toast.LENGTH_SHORT).show();
+            onDeleteItemListener.onItemDelete();
         });
-
+    }
+    public interface OnDeleteItemListener{
+        void onItemDelete();
     }
 }

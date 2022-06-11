@@ -1,6 +1,8 @@
 package com.app.countriesapp.ui.fragments;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.WallpaperManager;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -23,13 +25,20 @@ import com.app.countriesapp.ux.adapter.CanadaAdapter;
 import com.app.countriesapp.ux.adapter.IranAdapter;
 import com.app.countriesapp.ux.model.CanadaModel;
 import com.app.countriesapp.ux.model.IranModel;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-public class IranFragment extends Fragment implements IranAdapter.SetOnItemClickListener, IranAdapter.setOnMenuClickListenerIran{
+public class IranFragment extends Fragment implements IranAdapter.SetOnItemClickListener, IranAdapter.setOnMenuClickListenerIran, DeleteBottomSheetDialog.OnDeleteItemListener {
 
     private FragmentIranBinding binding;
     private IranAdapter iranAdapter;
+    private int position;
+    private DeleteBottomSheetDialog bottomSheetDialog;
+    private List<IranModel> listItem;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -52,7 +61,7 @@ public class IranFragment extends Fragment implements IranAdapter.SetOnItemClick
     }
 
     private List<IranModel> setListData(){
-        List<IranModel> listItem = new ArrayList<>();
+        listItem = new ArrayList<>();
         listItem.add(new IranModel("https://img.theculturetrip.com/wp-content/uploads/2015/07/shutterstock_343001582-masuleh-vilage-gilan-iran.jpg", "Gilan Village"));
         listItem.add(new IranModel("https://www.theglobetrottingdetective.com/wp-content/uploads/2021/03/Pink-Mosque-Shiraz.jpg", "Shiraz Mosque"));
         listItem.add(new IranModel("https://www.theglobetrottingdetective.com/wp-content/uploads/2020/12/Most-Beautiful-Places-in-Iran-Itinerary-Naqsh-e-Jahan-Square-Isfahan-AdobeStock_296771164-1024x684.jpg", "Naqshe-Jahan"));
@@ -71,7 +80,8 @@ public class IranFragment extends Fragment implements IranAdapter.SetOnItemClick
         return listItem;
     }
     @Override
-    public void ItemClickedIran(IranModel iranModel) {
+    public void ItemClickedIran(IranModel iranModel, int position) {
+        this.position = position;
         Bundle bundle = new Bundle();
         bundle.putSerializable("IRAN_MODEL", iranModel);
         Navigation.findNavController(binding.getRoot()).navigate(R.id.action_nav_iran_to_detailsFragmentIran, bundle);
@@ -80,6 +90,7 @@ public class IranFragment extends Fragment implements IranAdapter.SetOnItemClick
     public void MenuClickedIran(View view) {
         showPopUpMenuIran(view);
     }
+
     private void showPopUpMenuIran(View view){
         PopupMenu popupMenu = new PopupMenu(getContext(), view);
         popupMenu.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
@@ -97,7 +108,7 @@ public class IranFragment extends Fragment implements IranAdapter.SetOnItemClick
         popupMenu.show();
     }
     private void showDeleteBottomSheetIran(){
-        DeleteBottomSheetDialog bottomSheetDialog = new DeleteBottomSheetDialog();
+        bottomSheetDialog = new DeleteBottomSheetDialog();
         bottomSheetDialog.show(getChildFragmentManager(), "DELETE_BOTTOM_SHEET_DIALOG");
     }
     private void showDialogSetAsWallpaperIran(){
@@ -110,6 +121,28 @@ public class IranFragment extends Fragment implements IranAdapter.SetOnItemClick
         dialog.show();
     }
     private void setAsWallpaper(){
-        Toast.makeText(getContext(), "YESSS!!!", Toast.LENGTH_SHORT).show();
+        Glide.with(requireContext())
+                .asBitmap()
+                .load(listItem.get(position).getIranImage())
+                .into(new SimpleTarget<Bitmap>() {
+
+                    @Override
+                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+
+                        try {
+                            WallpaperManager.getInstance(requireContext()).setBitmap(resource);
+                            Toast.makeText(requireContext(), "Set as wallpaper is success!!", Toast.LENGTH_SHORT).show();
+                        } catch (IOException e) {
+                            Toast.makeText(requireContext(), "Set as wallpaper is not success", Toast.LENGTH_SHORT).show();
+                            e.printStackTrace();
+                        }
+                    }
+                });
+    }
+
+    @Override
+    public void onItemDelete() {
+        iranAdapter.deleteItem(position);
+        bottomSheetDialog.dismiss();
     }
 }

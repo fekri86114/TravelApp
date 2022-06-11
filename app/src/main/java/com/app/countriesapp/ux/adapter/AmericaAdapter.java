@@ -49,7 +49,7 @@ public class AmericaAdapter extends RecyclerView.Adapter<AmericaAdapter.AmericaV
         Glide.with(holder.itemView.getContext()).load(americaModel.getAmericaImage()).into(holder.imageViewAmerica);
         holder.textViewAmerica.setText(americaModel.getAmericaName());
         setFadeAnimation(holder.itemView, position);
-        holder.itemView.setOnClickListener(view -> listener.ItemClicked(americaModel));
+        holder.itemView.setOnClickListener(view -> listener.ItemClicked(americaModel, position));
         holder.imageMenu.setOnClickListener(view -> menuClickListener.MenuClicked(holder.imageMenu));
     }
 
@@ -73,10 +73,19 @@ public class AmericaAdapter extends RecyclerView.Adapter<AmericaAdapter.AmericaV
     public int getItemCount() {
         return americaModelList.size();
     }
+
     public interface SetOnItemClickListener{
-        void ItemClicked(AmericaModel americaModel);
+        void ItemClicked(AmericaModel americaModel, int position);
     }
+
     public interface SetOnMenuClickListener{
         void MenuClicked(View view);
+    }
+
+    public void deleteItem(int position){
+        americaModelList.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, getItemCount());
+
     }
 }

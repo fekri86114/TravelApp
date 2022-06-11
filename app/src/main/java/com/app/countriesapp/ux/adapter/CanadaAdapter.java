@@ -49,7 +49,7 @@ public class CanadaAdapter extends RecyclerView.Adapter<CanadaAdapter.CanadaView
         Glide.with(holder.itemView.getContext()).load(canadaModel.getCanadaImage()).into(holder.imageViewCanada);
         holder.textViewCanada.setText(canadaModel.getCanadaName());
         setFadeAnimation(holder.itemView, position);
-        holder.itemView.setOnClickListener(view -> listener.ItemClickedCanada(canadaModel));
+        holder.itemView.setOnClickListener(view -> listener.ItemClickedCanada(canadaModel, position));
         holder.imageMenuCanada.setOnClickListener(view -> menuClickListenerCanada.MenuClickedCanada(holder.imageMenuCanada));
     }
 
@@ -73,10 +73,17 @@ public class CanadaAdapter extends RecyclerView.Adapter<CanadaAdapter.CanadaView
     public int getItemCount() {
         return canadaModelList.size();
     }
+
     public interface SetOnItemClickListener{
-        void ItemClickedCanada(CanadaModel canadaModel);
+        void ItemClickedCanada(CanadaModel canadaModel, int position);
     }
     public interface SetOnMenuClickListenerCanada{
         void MenuClickedCanada(View view);
     }
+    public void deleteItem(int position){
+        canadaModelList.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, getItemCount());
+    }
+
 }

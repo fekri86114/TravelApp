@@ -1,11 +1,10 @@
 package com.app.countriesapp.ui.fragments;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
+import android.app.WallpaperManager;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupMenu;
@@ -22,14 +21,21 @@ import com.app.countriesapp.databinding.FragmentAmericaBinding;
 import com.app.countriesapp.ui.dialog.DeleteBottomSheetDialog;
 import com.app.countriesapp.ux.adapter.AmericaAdapter;
 import com.app.countriesapp.ux.model.AmericaModel;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AmericaFragment extends Fragment implements AmericaAdapter.SetOnItemClickListener, AmericaAdapter.SetOnMenuClickListener {
+public class AmericaFragment extends Fragment implements AmericaAdapter.SetOnItemClickListener, AmericaAdapter.SetOnMenuClickListener, DeleteBottomSheetDialog.OnDeleteItemListener {
 
     private FragmentAmericaBinding binding;
     private AmericaAdapter americaAdapter;
+    private int position;
+    private DeleteBottomSheetDialog bottomSheetDialog;
+    List<AmericaModel> listItem;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,10 +55,11 @@ public class AmericaFragment extends Fragment implements AmericaAdapter.SetOnIte
         binding.recyclerviewAmerica.setHasFixedSize(true);
         binding.recyclerviewAmerica.setLayoutManager(new GridLayoutManager(getContext(), 2));
         binding.recyclerviewAmerica.setAdapter(americaAdapter);
+
     }
 
     private List<AmericaModel> setListData() {
-        List<AmericaModel> listItem = new ArrayList<>();
+        listItem = new ArrayList<>();
         listItem.add(new AmericaModel("https://i.pinimg.com/originals/29/4a/df/294adf525edf1ab4e94db8039159794c.jpg", "White House"));
         listItem.add(new AmericaModel("https://i.pinimg.com/originals/23/37/03/233703cfaae80a3c24fc652f7ace910a.jpg", "Bridge"));
         listItem.add(new AmericaModel("https://www.roadaffair.com/wp-content/uploads/2021/11/castle-kentucky-usa-shutterstock_130598195.jpg", "Castle"));
@@ -72,7 +79,8 @@ public class AmericaFragment extends Fragment implements AmericaAdapter.SetOnIte
     }
 
     @Override
-    public void ItemClicked(AmericaModel americaModel) {
+    public void ItemClicked(AmericaModel americaModel, int position) {
+        this.position = position;
         Bundle bundle = new Bundle();
         bundle.putSerializable("AMERICA_MODEL", americaModel);
         Navigation.findNavController(binding.getRoot()).navigate(R.id.action_nav_america_to_detailsFragment2, bundle);
@@ -82,6 +90,7 @@ public class AmericaFragment extends Fragment implements AmericaAdapter.SetOnIte
     public void MenuClicked(View view) {
         showPopupMenu(view);
     }
+
     private void showPopupMenu(View view) {
         PopupMenu popupMenu = new PopupMenu(getContext(), view);
         popupMenu.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
@@ -98,20 +107,45 @@ public class AmericaFragment extends Fragment implements AmericaAdapter.SetOnIte
         });
         popupMenu.show();
     }
-    private void showDeleteBottomSheet(){
-        DeleteBottomSheetDialog bottomSheetDialog = new DeleteBottomSheetDialog();
+
+    private void showDeleteBottomSheet() {
+        bottomSheetDialog = new DeleteBottomSheetDialog();
         bottomSheetDialog.show(getChildFragmentManager(), "DELETE_BOTTOM_SHEET_DIALOG");
     }
-    private void showDialogSetAsWallpaper(){
+
+    private void showDialogSetAsWallpaper() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
         alertDialog.setTitle(R.string.set_as_wallpaper);
         alertDialog.setMessage(R.string.dialog_message);
-        alertDialog.setPositiveButton("YES", (dialogInterface, i) ->setAsWallpaper());
+        alertDialog.setPositiveButton("YES", (dialogInterface, i) -> setAsWallpaper());
         alertDialog.setNegativeButton("NO", (dialogInterface, i) -> dialogInterface.cancel());
         AlertDialog dialog = alertDialog.create();
         dialog.show();
     }
-    private void setAsWallpaper(){
-        Toast.makeText(getContext(), "YESSSS!!!", Toast.LENGTH_SHORT).show();
+
+    public void setAsWallpaper() {
+        Glide.with(requireContext())
+                .asBitmap()
+                .load(listItem.get(position).getAmericaImage())
+                .into(new SimpleTarget<Bitmap>() {
+
+                    @Override
+                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+
+                        try {
+                            WallpaperManager.getInstance(requireContext()).setBitmap(resource);
+                            Toast.makeText(requireContext(), "Set as wallpaper is success!!", Toast.LENGTH_SHORT).show();
+                        } catch (IOException e) {
+                            Toast.makeText(requireContext(), "Set as wallpaper is not success", Toast.LENGTH_SHORT).show();
+                            e.printStackTrace();
+                        }
+                    }
+                });
+    }
+
+    @Override
+    public void onItemDelete() {
+        americaAdapter.deleteItem(position);
+        bottomSheetDialog.dismiss();
     }
 }
