@@ -1,6 +1,7 @@
 <!--?xml version="1.0" encoding="UTF-8"?-->
 <resources>
   <color name="primaryColor">#1a237e</color>
+  <color name="primaryColorLight">#2836C3</color>
   <color name="primaryLightColor">#534bae</color>
   <color name="primaryDarkColor">#000051</color>
   <color name="secondaryColor">#ff8f00</color>
@@ -8,4 +9,6 @@
   <color name="secondaryDarkColor">#c56000</color>
   <color name="primaryTextColor">#ffffff</color>
   <color name="secondaryTextColor">#000000</color>
+  <color name="grey">#00000000</color>
+  <color name="blue">#03A9F4</color>
 </resources>

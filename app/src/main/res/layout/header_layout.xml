@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/primaryLightColor"
+    android:background="#DDDADA"
     android:layout_height="300dp">
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -26,7 +26,5 @@
         android:textSize="@dimen/text_size_normal"
         android:layout_marginTop="12dp"
         android:textColor="@color/primaryTextColor"/>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

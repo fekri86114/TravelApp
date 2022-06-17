@@ -45,8 +45,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setupDrawerNav();
 
     }
-
-
+    
     private void setupDrawerNav() {
         setSupportActionBar(binding.toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
@@ -62,9 +61,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationUI.setupWithNavController(binding.navigationView, navController);
         binding.navigationView.setNavigationItemSelectedListener(this);
 
-
     }
-
     private void setupBottomNav() {
         NavigationUI.setupWithNavController(binding.bottomNavigatinView, navController);
 //        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(

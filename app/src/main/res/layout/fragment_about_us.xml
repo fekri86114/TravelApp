@@ -6,31 +6,92 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragments.AboutUsFragment">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textview_about_us"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_margin="@dimen/spacing_2x"
+        android:id="@+id/appCompatImageView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/about_us"
-        android:gravity="center"
-        android:textSize="36sp"
-        android:textStyle="bold|italic"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/ic_launcher_icon_foreground" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_margin="@dimen/spacing_2x"
+        android:id="@+id/textview_about"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="@string/about_us"
+        android:textSize="36sp"
+        android:textStyle="italic|bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appCompatImageView" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/developer_textview"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
+        android:gravity="center"
         android:layout_height="wrap_content"
         android:text="@string/developer"
-        app:layout_constraintTop_toBottomOf="@id/textview_about_us"
-        app:layout_constraintStart_toStartOf="@id/textview_about_us"
-        app:layout_constraintEnd_toEndOf="@id/textview_about_us"
-        android:layout_marginTop="@dimen/text_size_small"
-        android:textSize="@dimen/text_size_normal"/>
+        app:layout_constraintTop_toBottomOf="@id/textview_about"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="@dimen/spacing_2x"
+        android:layout_marginTop="@dimen/text_size_xlarge"
+        android:textSize="14sp"
+        android:textStyle="normal|italic"/>
 
-<!--    <androidx.appcompat.widget.AppCompatTextView-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"/>-->
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/contact_us"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/developer_textview"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/contact_us"
+        android:layout_marginTop="@dimen/spacing_5x"
+        style="@style/TextViewBlackNormal"
+        android:textSize="@dimen/spacing_8x"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/github_link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/text_size_xxlarge"
+        android:text="@string/github"
+        android:textColor="@color/secondaryTextColor"
+        android:textSize="@dimen/text_size_xlarge"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/contact_us" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/g_mail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:gravity="center"
+        android:text="@string/g_mail"
+        android:textColor="@color/secondaryTextColor"
+        android:textSize="@dimen/text_size_normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linkedin_link" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/linkedin_link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:gravity="center"
+        android:text="@string/linkedin_link"
+        android:textColor="@color/secondaryTextColor"
+        android:textSize="@dimen/text_size_xlarge"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/github_link" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

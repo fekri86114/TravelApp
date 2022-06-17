@@ -17,5 +17,9 @@
         android:id="@+id/nav_iran"
         android:icon="@drawable/ic_flag"
         android:title="@string/iran" />
+    <item
+        android:id="@+id/nav_maps"
+        android:icon="@drawable/ic_baseline_search_24"
+        android:title="@string/more" />
 
 </menu>

@@ -9,7 +9,7 @@
     <string name="loading">Loading...</string>
     <string name="drawer_open">Drawer open</string>
     <string name="drawer_close">Drawer close</string>
-    <string name="developer">Developer: Mohammadreza Fekri</string>
+    <string name="developer">Developer: Mohammadreza Fekri \nThis app is about travel around 4 beautiful countries</string>
     <string name="delete">Delete</string>
     <string name="america">America</string>
     <string name="switzerland">Switzerland</string>
@@ -22,4 +22,9 @@
     <string name="confirm">Confirm</string>
     <string name="wallpaper_title">Set as wallpaper</string>
     <string name="dialog_message">Are you sure?</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="github">GitHub: Mohammadreza Fekri</string>
+    <string name="linkedin_link">Linkedin: Mohammadreza Fekri</string>
+    <string name="g_mail">fekri.mohammadreza1386@gmail.com</string>
+    <string name="more">More</string>
 </resources>

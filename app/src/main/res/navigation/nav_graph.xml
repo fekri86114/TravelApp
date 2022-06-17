@@ -6,6 +6,15 @@
     app:startDestination="@id/nav_america">
 
     <fragment
+        android:id="@+id/nav_america"
+        android:name="com.app.countriesapp.ui.fragments.AmericaFragment"
+        android:label="AMERICA"
+        tools:layout="@layout/fragment_america" >
+        <action
+            android:id="@+id/action_nav_america_to_detailsFragment2"
+            app:destination="@id/detailsFragment" />
+    </fragment>
+    <fragment
         android:id="@+id/nav_about_us"
         android:name="com.app.countriesapp.ui.fragments.AboutUsFragment"
         android:label="ABOUT US"
@@ -18,15 +27,6 @@
         <action
             android:id="@+id/action_nav_canada_to_detailsFragmentCanada"
             app:destination="@id/detailsFragmentCanada" />
-    </fragment>
-    <fragment
-        android:id="@+id/nav_america"
-        android:name="com.app.countriesapp.ui.fragments.AmericaFragment"
-        android:label="AMERICA"
-        tools:layout="@layout/fragment_america" >
-        <action
-            android:id="@+id/action_nav_america_to_detailsFragment2"
-            app:destination="@id/detailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/nav_switzerland"
@@ -66,4 +66,11 @@
         android:id="@+id/detailsFragmentSwitzerland"
         android:name="com.app.countriesapp.ui.fragments.details.DetailsFragmentSwitzerland"
         android:label="DetailsFragmentSwitzerland" />
+    <fragment
+        android:id="@+id/nav_maps"
+        android:name="com.app.countriesapp.ui.fragments.MapsFragment"
+        android:label="fragment_maps"
+        tools:layout="@layout/fragment_maps" />
+
+
 </navigation>

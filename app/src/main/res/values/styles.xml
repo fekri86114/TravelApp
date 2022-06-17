@@ -12,4 +12,10 @@
         <item name="android:textSize">@dimen/text_size_normal</item>
         <item name="android:textStyle">normal</item>
     </style>
+    <style name="TextViewBlackNormal">
+        <item name="android:textColor">#A82C2C2C</item>
+        <item name="fontFamily">@font/lato_bold</item>
+        <item name="android:textSize">@dimen/text_size_xlarge</item>
+        <item name="android:textStyle">italic|bold</item>
+    </style>
 </resources>
